@@ -1,11 +1,13 @@
 export function getData(data, parent, child) {
   function findRepeated(parent, child, results) {
+    // console.log(parent, child, results)
     if (child in results[parent]) {
       results[parent][child] += 1
     } else {
       results[parent][child] = 1
     }
-    return results
+    // console.log(results)
+    return results       
   }
 
   function extractStatistics(data, objKey) {
@@ -18,6 +20,7 @@ export function getData(data, parent, child) {
         statistics[key].push(tempdata)
       }
     }
+    // console.log(statistics)
     return statistics
   }
   // result looks like this
@@ -31,10 +34,13 @@ export function getData(data, parent, child) {
   // let parent = "state"
   // let child = "product"
   for (let obj of data) {
+    // console.log(obj,states,obj[parent], states.hasOwnProperty(obj[parent]))
     if (!states.hasOwnProperty(obj[parent])) {
+      // console.log(parent)
       states[obj[parent]] = {}
       states = findRepeated(obj[parent], obj[child], states)
     } else {
+      
       states = findRepeated(obj[parent], obj[child], states)
     }
   }
@@ -51,6 +57,7 @@ export function capitalizeWords(string) {
 }
 
 export function getPieData(data, valueData) {
+  console.log(valueData)
   const chartData = data.reduce((carry, item) => {
     const { product, [valueData]: req } = item
 
@@ -59,17 +66,15 @@ export function getPieData(data, valueData) {
     }
 
     carry[product] += parseFloat(req)
-
     return carry
-  }, {})
+  },{})
 
   const finalData = [...Object.entries(chartData)]
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5)
-    .map((entry) => ({
-      name: entry[0],
-      value: entry[1],
-    }))
-
+    .map((entry) => {
+      return { name: entry[0],value: entry[1],}
+})
+    console.log(finalData)
   return finalData
 }

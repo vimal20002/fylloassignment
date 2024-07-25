@@ -14,13 +14,7 @@ import {
 
 function Bigchart({
   title,
-  data,
-  dataKey,
-  grid,
-  parent,
-  child,
-  subtitle,
-  defaultValue,
+  data
 }) {
   const months = [
     "January",
@@ -85,7 +79,7 @@ function Bigchart({
   function OnchangeSetmonthvalue(e) {
     setMonthvalue(e.target.value)
   }
-
+  console.log(1)
   let chartData = data.filter((obj) => {
     if (obj["state"] === statevalue && obj["month"] === monthvalue) {
       return true
@@ -99,6 +93,8 @@ function Bigchart({
 
   return (
     <div className="bigchart">
+      <div className="topBigChart">
+
       <h3 className="bigchartTitle">{title}</h3>
 
       <div className="bigchartSelect">
@@ -126,7 +122,8 @@ function Bigchart({
           <h6 className="errordata">No data available to show</h6>
         )}
       </div>
-      <ResponsiveContainer width="100%" height="100%" aspect={2 / 1}>
+        </div>
+      <ResponsiveContainer width="50%" height="100%" aspect={2 / 1}>
         <BarChart
           width={700}
           height={300}

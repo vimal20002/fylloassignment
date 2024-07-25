@@ -1,4 +1,5 @@
 import { PieChart, Pie, Cell, Tooltip } from "recharts"
+import {useMemo} from "react"
 import "./Piechart.css"
 import { getPieData } from "../../utils.js"
 
@@ -32,14 +33,14 @@ const renderCustomizedLabel = ({
 }
 
 function Piechart({ data, title, dataKey }) {
-  let chartData = getPieData(data, dataKey)
+  let chartData = useMemo(()=>getPieData(data, dataKey),[data,dataKey])
   return (
     <div className="piechart">
       <h3 className="piechartTitle">{title}</h3>
-      <PieChart width={500} height={500} aspect={2 / 1}>
+      <PieChart width={400} height={400} aspect={1 / 1}>
         <Pie
           data={chartData}
-          cx={250}
+          cx={200}
           cy={220}
           labelLine={false}
           label={renderCustomizedLabel}

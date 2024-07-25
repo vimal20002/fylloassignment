@@ -70,7 +70,7 @@ function ProductList() {
 
       <div className="productListTable">
         <div className="ag-theme-alpine" style={{ width: "100%" }}>
-          <AgGridReact
+          <AgGridReact pagination
             rowData={data}
             columnHoverHighlight={true}
             columnDefs={columns}

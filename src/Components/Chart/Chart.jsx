@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { getData,capitalizeWords } from "../../utils.js"
 import "./Chart.css"
 
@@ -23,7 +23,7 @@ function Chart({
   subtitle,
   defaultValue,
 }) {
-  let a = getData(data, parent, child)
+  let a = useMemo(()=>getData(data, parent, child),[data,parent,child])
 
   const [view, setView] = useState(defaultValue[parent])
 
